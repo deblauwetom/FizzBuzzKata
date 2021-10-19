@@ -14,6 +14,9 @@ public:
     std::string nextAnswer()
     {
         ++currentAnswer;
+        if ((currentAnswer % 3) == 0 && (currentAnswer % 5) == 0) {
+            return "fizzbuzz";
+        }
         if ((currentAnswer % 3) == 0) {
             return "fizz";
         }
@@ -85,6 +88,17 @@ TEST_F(FBGameStartedFixture, GivenNextAnswerDivisableBy5_WhenNextAnswer_ThenPrin
 
     //then
     EXPECT_THAT(next, Eq("buzz"));
+}
+
+TEST_F(FBGameStartedFixture, GivenNextAnswerDivisableBy5AndBy3_WhenNextAnswer_ThenPrintFizzBuzz)
+{
+    incrementAnswer(14);
+
+    //when
+    auto next = game.nextAnswer();
+
+    //then
+    EXPECT_THAT(next, Eq("fizzbuzz"));
 }
 
 TEST(RealProgram, Output)

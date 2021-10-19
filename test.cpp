@@ -34,15 +34,16 @@ private:
 
     void addWordToAnswerIfDivisableByOrHasGivenNumberInIt(int number, const std::string& word, std::string& answer)
     {
-        if (isAnswerDivisableBy(number)) {
+        if (isAnswerDivisableBy(number) || answerHasNumberInIt(number)) {
             answer += word;
-        } else {
-            auto printed = printAnswerCounter();
-            auto posOfNumber = printed.find(std::to_string(number));
-            if (posOfNumber != std::string::npos) {
-                answer += word;
-            }
         }
+    }
+
+    bool answerHasNumberInIt(int number)
+    {
+        auto printed = printAnswerCounter();
+        auto posOfNumber = printed.find(std::to_string(number));
+        return (posOfNumber != std::string::npos);
     }
 
     std::optional<std::string> checkSpecialAnswers()

@@ -27,18 +27,26 @@ private:
 
     bool isAnswerDivisableBy(int number) { return (currentAnswer % number) == 0; }
 
-    void addWordToAnswerIfDivisableBy(int number, const std::string &word, std::string &answer)
+    void addWordToAnswerIfDivisableByOrHasGivenNumberInIt(int number,
+                                                          const std::string &word,
+                                                          std::string &answer)
     {
         if (isAnswerDivisableBy(number)) {
             answer += word;
+        } else {
+            auto printed = printAnswerCounter();
+            auto posOfNumber = printed.find(std::to_string(number));
+            if (posOfNumber != std::string::npos) {
+                answer += word;
+            }
         }
     }
 
     std::optional<std::string> checkSpecialAnswers()
     {
         std::string answer;
-        addWordToAnswerIfDivisableBy(3, "Fizz", answer);
-        addWordToAnswerIfDivisableBy(5, "Buzz", answer);
+        addWordToAnswerIfDivisableByOrHasGivenNumberInIt(3, "Fizz", answer);
+        addWordToAnswerIfDivisableByOrHasGivenNumberInIt(5, "Buzz", answer);
         if (!answer.empty()) {
             return answer;
         }
@@ -119,6 +127,28 @@ TEST_F(FBGameStartedFixture, GivenNextAnswerDivisableBy5AndBy3_WhenNextAnswer_Th
 
     //then
     EXPECT_THAT(next, Eq("FizzBuzz"));
+}
+
+TEST_F(FBGameStartedFixture, GivenNextAnswerHasA3InTheNumber_WhenNextAnswer_ThenPrintFizz)
+{
+    incrementAnswer(30);
+
+    //when
+    auto next = game.nextAnswer();
+
+    //then
+    EXPECT_THAT(next, Eq("Fizz"));
+}
+
+TEST_F(FBGameStartedFixture, GivenNextAnswerHasA5InTheNumber_WhenNextAnswer_ThenPrintBuzz)
+{
+    incrementAnswer(55);
+
+    //when
+    auto next = game.nextAnswer();
+
+    //then
+    EXPECT_THAT(next, Eq("Buzz"));
 }
 
 TEST(RealProgram, Output)

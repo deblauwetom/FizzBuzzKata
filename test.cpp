@@ -4,12 +4,11 @@
 using namespace testing;
 using namespace std;
 
-class FBGame
-{
+class FBGame {
 public:
-    FBGame() {}
+    FBGame() { }
 
-    void start() {}
+    void start() { }
 
     std::string nextAnswer()
     {
@@ -23,13 +22,17 @@ public:
     }
 
 private:
-    void incrementAnswerCounter() { ++currentAnswer; }
+    void incrementAnswerCounter()
+    {
+        ++currentAnswer;
+    }
 
-    bool isAnswerDivisableBy(int number) { return (currentAnswer % number) == 0; }
+    bool isAnswerDivisableBy(int number)
+    {
+        return (currentAnswer % number) == 0;
+    }
 
-    void addWordToAnswerIfDivisableByOrHasGivenNumberInIt(int number,
-                                                          const std::string &word,
-                                                          std::string &answer)
+    void addWordToAnswerIfDivisableByOrHasGivenNumberInIt(int number, const std::string& word, std::string& answer)
     {
         if (isAnswerDivisableBy(number)) {
             answer += word;
@@ -53,13 +56,15 @@ private:
         return {};
     }
 
-    std::string printAnswerCounter() { return std::to_string(currentAnswer); }
+    std::string printAnswerCounter()
+    {
+        return std::to_string(currentAnswer);
+    }
 
-    int currentAnswer{0};
+    int currentAnswer { 0 };
 };
 
-class FBGameFixture : public Test
-{
+class FBGameFixture : public Test {
 public:
     FBGame game;
 
@@ -71,10 +76,12 @@ public:
     }
 };
 
-class FBGameStartedFixture : public FBGameFixture
-{
+class FBGameStartedFixture : public FBGameFixture {
 public:
-    FBGameStartedFixture() { game.start(); }
+    FBGameStartedFixture()
+    {
+        game.start();
+    }
 };
 
 TEST_F(FBGameFixture, GivenNewGame_WhenStarting_ThenStartAtOne)

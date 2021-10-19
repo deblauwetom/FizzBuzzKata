@@ -14,17 +14,19 @@ public:
     std::string nextAnswer()
     {
         ++currentAnswer;
-        if ((currentAnswer % 3) == 0 && (currentAnswer % 5) == 0) {
+        if (isAnswerDivisableBy(3) && isAnswerDivisableBy(5)) {
             return "fizzbuzz";
         }
-        if ((currentAnswer % 3) == 0) {
+        if (isAnswerDivisableBy(3)) {
             return "fizz";
         }
-        if ((currentAnswer % 5) == 0) {
+        if (isAnswerDivisableBy(5)) {
             return "buzz";
         }
         return std::to_string(currentAnswer);
     }
+
+    bool isAnswerDivisableBy(int number) { return (currentAnswer % number) == 0; }
 
 private:
     int currentAnswer{0};

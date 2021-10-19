@@ -22,6 +22,7 @@ public:
         }
     }
 
+private:
     void incrementAnswerCounter() { ++currentAnswer; }
 
     bool isAnswerDivisableBy(int number) { return (currentAnswer % number) == 0; }
@@ -46,7 +47,6 @@ public:
 
     std::string printAnswerCounter() { return std::to_string(currentAnswer); }
 
-private:
     int currentAnswer{0};
 };
 

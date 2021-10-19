@@ -14,14 +14,15 @@ public:
     std::string nextAnswer()
     {
         ++currentAnswer;
-        if (isAnswerDivisableBy(3) && isAnswerDivisableBy(5)) {
-            return "fizzbuzz";
-        }
+        std::string answer;
         if (isAnswerDivisableBy(3)) {
-            return "fizz";
+            answer += "fizz";
         }
         if (isAnswerDivisableBy(5)) {
-            return "buzz";
+            answer += "buzz";
+        }
+        if (!answer.empty()) {
+            return answer;
         }
         return std::to_string(currentAnswer);
     }

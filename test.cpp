@@ -13,15 +13,16 @@ public:
 
     std::string nextAnswer()
     {
-        ++currentAnswer;
-        std::string answer;
-        addWordToAnswerIfDivisableBy(3, "Fizz", answer);
-        addWordToAnswerIfDivisableBy(5, "Buzz", answer);
-        if (!answer.empty()) {
-            return answer;
+        incrementAnswerCounter();
+
+        if (auto specialAnswer = checkSpecialAnswers()) {
+            return *specialAnswer;
+        } else {
+            return printAnswerCounter();
         }
-        return std::to_string(currentAnswer);
     }
+
+    void incrementAnswerCounter() { ++currentAnswer; }
 
     bool isAnswerDivisableBy(int number) { return (currentAnswer % number) == 0; }
 
@@ -31,6 +32,19 @@ public:
             answer += word;
         }
     }
+
+    std::optional<std::string> checkSpecialAnswers()
+    {
+        std::string answer;
+        addWordToAnswerIfDivisableBy(3, "Fizz", answer);
+        addWordToAnswerIfDivisableBy(5, "Buzz", answer);
+        if (!answer.empty()) {
+            return answer;
+        }
+        return {};
+    }
+
+    std::string printAnswerCounter() { return std::to_string(currentAnswer); }
 
 private:
     int currentAnswer{0};

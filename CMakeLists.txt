@@ -6,7 +6,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(CTest)
-include(${CMAKE_CURRENT_LIST_DIR}/conan.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/cmake/conan.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/cmake/katas.cmake)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
 
@@ -20,13 +21,5 @@ conan_cmake_install(PATH_OR_REFERENCE .
                     REMOTE conancenter
                     SETTINGS ${settings})
 
-add_library(katas
-    game.cpp
-    game.hpp
-    )
+add_subdirectory(FizzBuzz)
 
-add_executable(katasTest test.cpp)
-
-find_package(GTest REQUIRED)
-target_link_libraries(katasTest PUBLIC katas GTest::gtest GTest::gtest_main)
-add_test(NAME katasTest COMMAND katasTest)

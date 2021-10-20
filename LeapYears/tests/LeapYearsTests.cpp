@@ -44,7 +44,7 @@ TEST_F(LeapYearsFixture, GivenYearDivisableBy100ButNotBy400_ThenIsNotLeapYear)
 
 TEST_F(LeapYearsFixture, GivenYearDivisableBy4ButNotBy100_ThenIsLeapYear)
 {
-    auto year = 2008;
-
-    EXPECT_TRUE(isLeapYear(year));
+    EXPECT_TRUE(isLeapYear(2008));
+    EXPECT_TRUE(isLeapYear(2012));
+    EXPECT_TRUE(isLeapYear(2016));
 }

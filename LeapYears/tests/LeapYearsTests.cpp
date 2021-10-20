@@ -41,3 +41,10 @@ TEST_F(LeapYearsFixture, GivenYearDivisableBy100ButNotBy400_ThenIsNotLeapYear)
 
     EXPECT_FALSE(isLeapYear(year));
 }
+
+TEST_F(LeapYearsFixture, GivenYearDivisableBy4ButNotBy100_ThenIsLeapYear)
+{
+    auto year = 2008;
+
+    EXPECT_TRUE(isLeapYear(year));
+}

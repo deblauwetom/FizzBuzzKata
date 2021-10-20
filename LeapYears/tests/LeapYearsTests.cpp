@@ -11,6 +11,10 @@ bool isLeapYear(int year)
 {
     auto divisableBy100 = ((year % 100) == 0 ? true : false);
     auto divisableBy400 = ((year % 400) == 0 ? true : false);
+    auto divisableBy4 = ((year % 4) == 0 ? true : false);
+    if (!divisableBy4) {
+        return false;
+    }
     if (divisableBy100 && !divisableBy400) {
         return false;
     }
@@ -47,4 +51,9 @@ TEST_F(LeapYearsFixture, GivenYearDivisableBy4ButNotBy100_ThenIsLeapYear)
     EXPECT_TRUE(isLeapYear(2008));
     EXPECT_TRUE(isLeapYear(2012));
     EXPECT_TRUE(isLeapYear(2016));
+}
+
+TEST_F(LeapYearsFixture, GivenYearNotDivisableBy4_ThenIsNotLeapYear)
+{
+    EXPECT_FALSE(isLeapYear(2301));
 }

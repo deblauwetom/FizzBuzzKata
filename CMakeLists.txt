@@ -22,4 +22,5 @@ conan_cmake_install(PATH_OR_REFERENCE .
                     SETTINGS ${settings})
 
 add_subdirectory(FizzBuzz)
+add_subdirectory(LeapYears)
 

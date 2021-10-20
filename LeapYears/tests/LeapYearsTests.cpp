@@ -9,13 +9,13 @@ using namespace std;
 
 bool isLeapYear(int year)
 {
-    auto divisableBy100 = ((year % 100) == 0 ? true : false);
-    auto divisableBy400 = ((year % 400) == 0 ? true : false);
-    auto divisableBy4 = ((year % 4) == 0 ? true : false);
-    if (!divisableBy4) {
+    auto isDivisableBy = [year](int i) {
+        return (year % i) == 0;
+    };
+    if (!isDivisableBy(4)) {
         return false;
     }
-    if (divisableBy100 && !divisableBy400) {
+    if (isDivisableBy(100) && !isDivisableBy(400)) {
         return false;
     }
     return true;
